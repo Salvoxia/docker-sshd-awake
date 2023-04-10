@@ -1,6 +1,7 @@
 # SSHD for Docker with awake
 
-This image contains an SSH daemon and rsync, as well as the tool awake to send WoL packages.
+This image contains an SSH daemon and rsync, as well as the tool awake to send WoL packets.
+
 
 ## Disclaimer
 Credit: [panubo/docker-sshd](https://github.com/panubo/docker-sshd)
@@ -8,16 +9,20 @@ Credit: [panubo/docker-sshd](https://github.com/panubo/docker-sshd)
 This image is based on panubo's docker-sshd image, with the sole addition of awake being installed.
 The itentended use case is to use this image as a service to SSH into from another container running a scheduler and waking up other machines on the network using awake.
 
+#### Upstream Links
+
+* Docker Registry @ [salvoxia/sshd-awake](https://hub.docker.com/r/salvoxia/sshd-awake)
+* GitHub @ [salvoxia/docker-sshd-awake](https://github.com/salvoxia/docker-sshd-awake)
 
 ## Cheat Sheet
 __Build__ 
 ```bash
-docker build -t salvoxia/docker-sshd-awake:latest .
+docker build -t salvoxia/sshd-awake:latest .
 ```
 __Build Multi-Arch (buildx)__ 
  ```bash
  docker buildx create --name multi-platform-builder --platform linux/arm/v7,linux/arm64/v8,linux/amd64
- docker buildx build --builder multi-platform-builder -t salvoxia/docker-sshd-awake:latest .
+ docker buildx build --builder multi-platform-builder -t salvoxia/sshd-awake:latest .
 ```
 
 ## Broadcasting from a docker container
@@ -29,4 +34,3 @@ The broadcast address needs to be specified explicitly for the broadcast to be r
 ```bash
 awake -b 192.168.1.255 AB:CD:EF:12:34:56
 ```
-
